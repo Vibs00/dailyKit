@@ -2,14 +2,13 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import starwars from "./images/starwars.jpg";
+import { Button } from 'react-bootstrap';
 
 class Row extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
-      <Card bg="secondary" text="white" style={{ width: '18rem', margin: "1rem"}}>
+      <Card bg="secondary" text="white" style={{ margin: '1rem', display: 'flex', flexDirection: 'row', opacity: '0.7' }}>
         <Card.Header>{this.props.gender}</Card.Header>
         <Card.Body>
           <Card.Title>{this.props.name}</Card.Title>
@@ -29,7 +28,7 @@ class Table extends React.Component {
     super(props);
     this.state = {
       info: [' ']
-    }
+    };
   }
 
   addRow = () => {
@@ -57,6 +56,10 @@ class Table extends React.Component {
   render() {
     return (
       <>
+        <img
+          src={starwars}
+          style={{ position: 'fixed', filter: "brightness(50%)", top: '0', left: '0' }}
+        />
         {this.addRow()}
       </>
     );
