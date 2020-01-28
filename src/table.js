@@ -8,7 +8,7 @@ import SortingAndSearching from './sorting_and_searching.js';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import paginationBasic from './_pagination.js';
+import PaginationBasic from './_pagination.js';
 
 class OneRow extends React.Component {
   render() {
@@ -123,7 +123,7 @@ class Table extends React.Component {
             </Col>
           </Row>
         </Container>
-        <paginationBasic />
+        <PaginationBasic />
       </>
     );
   }
