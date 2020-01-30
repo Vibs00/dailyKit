@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Dropdown from 'react-bootstrap/Dropdown';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -15,7 +15,7 @@ class SortingAndSearching extends React.Component {
             <Card bg="secondary" text="white" style={{ margin: '1rem', width: '18rem', position: 'sticky' }}>
                 <Card.Body>
                     <Card.Text>
-                        <SearchBy />
+                        <SearchBy handelSearchBy={this.props.handelSearchBy} />
                         <br />
                         <SortBy handleSortBy={this.props.handleSortBy} />
                         <br />
@@ -51,15 +51,43 @@ function FilterBy() {
     );
 }
 
-function SearchBy() {
+function SearchBy(props) {
+    const [inputTemp, setInput] = useState(
+        ""
+    );
+    const [inputSaved, saveInput] = useState(
+        ""
+    );
+
+    function handelSearchOnChange(e) {
+        let val = inputTemp;
+        val = e.target.value;
+        setInput(val);
+        console.log(inputTemp);
+        return;
+    }
+
+    function saveSearchInput() {
+        let val = inputTemp.trim().split(' ').join('+');
+        setInput('');
+        if (val)
+            saveInput(val);
+        else
+            return;
+        console.log(inputSaved, inputTemp);
+        props.handelSearchBy();
+    }
+
     return (
         <InputGroup className="mb-3">
             <FormControl
                 aria-label="Default"
                 aria-describedby="inputGroup-sizing-default"
+                value={inputTemp}
+                onChange={(event) => handelSearchOnChange(event)}
             />
             <InputGroup.Append>
-                <Button variant="outline-light">Search</Button>
+                <a href={"#/" + inputSaved}><Button onClick={saveSearchInput} variant="outline-light">Search</Button></a>
             </InputGroup.Append>
         </InputGroup>
     );
